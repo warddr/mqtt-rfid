@@ -2,9 +2,11 @@ import paho.mqtt.client as mqtt
 import sqlite3
 from os.path import exists
 
+mqtt_server = "<IP MQTT broker>"
+
 conn = sqlite3.connect('rfid.db')
 conn.execute('''
-    CREATE TABLE log(
+    CREATE TABLE IF NOT EXISTS log(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     tijd DATETIME DEFAULT CURRENT_TIMESTAMP,
     lezer INTEGER,
@@ -14,7 +16,7 @@ conn.execute('''
 ''')
 
 conn.execute('''
-CREATE TABLE badges(
+CREATE TABLE IF NOT EXISTS badges(
  id INTEGER PRIMARY KEY AUTOINCREMENT,
  kaart TEXT
 );
@@ -50,7 +52,7 @@ client.on_message = on_message
 
 if __name__ == '__main__':
     client.username_pw_set(username="IoT",password="DitIsGoed")
-    client.connect("broker.emqx.io", 1883, 60)
+    client.connect(mqtt_server, 1883, 60)
     client.loop_forever()
 
 
