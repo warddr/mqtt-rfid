@@ -2,19 +2,13 @@
 Test script to send some messages to the MQTT message broker
 """
 import paho.mqtt.client as mqtt
+import time
 
-mqtt_server = "<IP MQTT broker>"
-mqtt_student_id = "<Your ID with no spaces>"
+# mqtt_server = "<IP MQTT broker>"
+# mqtt_student_id = "<Your ID with no spaces>"
 
-
-def on_connect(client, userdata, flags, rc):
-    """
-    Callback function when the sever connect to the MQTT message broker
-    """
-    # logging of connection
-    print("Connected as client with result code "+str(rc))
-    # This client subscribes to MQTT broker to the channel
-    client.subscribe(f"AP/rfid/deur/{mqtt_student_id}")
+mqtt_server = "3.72.41.159"
+mqtt_student_id = "s123456"
 
 
 def on_message(client, userdata, msg):
@@ -28,9 +22,15 @@ def on_message(client, userdata, msg):
 
 
 client = mqtt.Client()
-client.on_connect = on_connect
 client.on_message = on_message
 client.username_pw_set("IoT", "DitIsGoed")
 client.connect(mqtt_server, 1883, 60)
+client.loop_start()
+print(f"Subscribe to AP/rfid/deur/{mqtt_student_id}/+")
+client.subscribe(f"AP/rfid/deur/{mqtt_student_id}/+")
+print(f"Publish 'Test_User_0001' to AP/rfid/lezer/{mqtt_student_id}/FFFF")
 client.publish(f"AP/rfid/lezer/{mqtt_student_id}/FFFF", f"Test_User_0001")
-client.loop(timeout=30)
+print(f"Wait for response")
+time.sleep(5)
+client.loop_stop()
+
