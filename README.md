@@ -7,7 +7,7 @@ A small python script to run a test mqtt server
 - Sqlite3
 - Python 3.10
 - Pip3 of Python
-- MQTT broker (Mosquitto)
+- MQTT broker (Mossquitto)
 - Optionally: python-is-python3
 
 ## Installation
