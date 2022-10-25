@@ -11,11 +11,9 @@ import paho.mqtt.client as mqtt
 import sqlite3
 
 # Replace with the IP address of your targeted MQTT message broker (install a Mosquitto on a Pi)
-# mqtt_server = "<IP MQTT broker>"
-# mqtt_student_id = "<Your ID with no spaces>"
+mqtt_server = "<IP MQTT broker>"
+mqtt_student_id = "<Your ID with no spaces>"
 
-mqtt_server = "3.72.41.159"
-mqtt_student_id = "s123456"
 
 # Create a sqlite3 database
 conn = sqlite3.connect('rfid.db')

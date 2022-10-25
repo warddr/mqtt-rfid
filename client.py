@@ -4,11 +4,8 @@ Test script to send some messages to the MQTT message broker
 import paho.mqtt.client as mqtt
 import time
 
-# mqtt_server = "<IP MQTT broker>"
-# mqtt_student_id = "<Your ID with no spaces>"
-
-mqtt_server = "3.72.41.159"
-mqtt_student_id = "s123456"
+mqtt_server = "<IP MQTT broker>"
+mqtt_student_id = "<Your ID with no spaces>"
 
 
 def on_message(client, userdata, msg):
